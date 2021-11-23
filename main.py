@@ -3,19 +3,27 @@ import random
 
 from PyQt5 import uic  # Импортируем uic
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 
 
-class MyWidget(QMainWindow):
+class Example(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
-        self.pushButton.clicked.connect(self.paint)
+        self.button = QPushButton(self)
+        self.button.setGeometry(10, 10, 30, 50)
+        self.setGeometry(100, 100, 700, 700)
+
+
+class MyWidget(Example):
+    def __init__(self):
+        super().__init__()
+        self.button.clicked.connect(self.paint)
         self.do_paint = False
 
     def draw_el(self, qp):
-        qp.setBrush(QColor(255, 186, 0))
-        qp.drawEllipse(random.randint(100, 200), random.randint(100, 200), random.randint(30, 100), random.randint(30, 100))
+        self.a = random.randint(30, 100)
+        qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        qp.drawEllipse(random.randint(81, 650), random.randint(81, 650), self.a, self.a)
 
 
     def paintEvent(self, event):
